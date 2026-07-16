@@ -1,0 +1,163 @@
+JDBC(java Database Connectivity)
+
+JDBC is a Java API used to connect and interact with databases.
+✅ Connect to database
+✅ Execute SQL queries
+✅ Insert / update / delete data
+✅ Retrieve data
+
+1. Load Driver
+2. Create Connection-> Class.forName("com.mysql.cj.jdbc.Driver");
+Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/test", "root", "password");
+3. Create Statement-> statement stmt = con.createStatement();
+           preparedStatement-> PreparedStatement ps = con.prepareStatement(
+    "SELECT * FROM user WHERE id=?"
+);
+CallableStatement-> Used for stored procedures
+
+4. Execute Query -> ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+while (rs.next()) { System.out.println(rs.getInt("id") + " " + rs.getString("name"));
+        }
+5. Close Connection-> con.close();
+
+Types of Queries
+executeQuery()   // SELECT
+executeUpdate()  // INSERT, UPDATE, DELETE
+execute()        // Any SQL
+
+statement vs prepared statement: Statement executes static SQL and is prone to SQL injection, whereas PreparedStatement uses precompiled parameterized queries, improving performance and security.
+
+Statement executes static SQL and is prone to SQL injection, whereas PreparedStatement uses precompiled parameterized queries, improving performance and security.
+
+Spring Jdbc
+Spring JDBC provides a simpler way to interact with databases using JdbcTemplate, eliminating boilerplate code of JDBC.
+Less code
+Automatic resource management
+Cleaner and easier to use
+
+Jdbc vs SpringJdbc
+
+JDBC requires manual handling of database operations, whereas Spring JDBC simplifies it by reducing boilerplate code and providing features like automatic resource and exception management.
+
+In real projects, we use Spring JDBC or JPA instead of raw JDBC because it reduces boilerplate code and improves maintainability.
+
+JdbcTemplate:  JdbcTemplate is the main class in Spring JDBC that simplifies database operations.
+Handles connection automatically
+Executes SQL
+Closes resources
+JdbcTemplate is the main helper class in Spring JDBC that simplifies database operations.
+
+common methods:
+query()             // Multiple rows
+          example: jdbcTemplate.update("INSERT INTO users(id, name) VALUES (?, ?)", 1, "John");
+queryForObject()    // Single row
+         User user = jdbcTemplate.queryForObject("SELECT * FROM users WHERE id=?",new UserRowMapper(),1);
+
+update()            // INSERT, UPDATE, DELETE
+ 
+✅ Reduces boilerplate
+✅ Improves readability
+✅ Handles connections automatically
+
+RowMapper: RowMapper is an interface used to convert each row of ResultSet into a Java object.
+Database → rows
+Application → objects
+👉 RowMapper converts: DB row → Java object
+Maps one row at a time
+Used in SELECT queries
+Converts DB → Object
+Exception Handling in Spring JDBC
+Spring JDBC converts checked SQLExceptions into runtime exceptions (DataAccessException), making exception handling cleaner and easier.
+Spring introduces: DataAccessException
+This is an unchecked (runtime) exception
+✅ No checked exceptions
+✅ Cleaner code
+✅ Consistent exception handling
+✅ No need to catch everywhere
+Spring converts SQLException into its own exceptions
+SQLException → DataAccessException
+Done automatically by Spring
+Exception Hierarchy
+DataAccessException
+    ├── DataIntegrityViolationException->Occurs when constraints are violated(NOT NULL, foreign key etc)
+    ├── DuplicateKeyException -> Occurs when inserting duplicate primary key
+    ├── EmptyResultDataAccessException->Occurs when No data found when expecting one result
+    ├── IncorrectResultSizeDataAccessException->Occurs when  More than expected rows returned
+
+Application Code
+      ↓
+JdbcTemplate
+      ↓
+JDBC Driver executes SQL
+      ↓
+SQLException occurs
+      ↓
+Spring converts → DataAccessException
+
+JDBC vs ORM
+
+JDBC requires manual SQL and gives full control, whereas ORM abstracts database operations using objects, reducing code and improving development speed
+In our project, we use Spring Data JPA for regular operations and JdbcTemplate for complex or performance-critical queries.
+Batch Updates
+Batch update is used to execute multiple database operations in one go to improve performance and reduce database calls.
+
+In our project, we used batch updates with JdbcTemplate to efficiently insert large datasets, reducing database calls and improving performance.
+
+1. Using List<Object[]> (Simple Way)
+
+List<Object[]> users = List.of(
+    new Object[]{1, "John"},
+    new Object[]{2, "Alice"},
+    new Object[]{3, "Bob"}
+);
+
+jdbcTemplate.batchUpdate(
+    "INSERT INTO users(id, name) VALUES (?, ?)",
+    users
+);
+
+ 2. Using BatchPreparedStatementSetter (Advanced)
+
+
+jdbcTemplate.batchUpdate(
+    "INSERT INTO users(id, name) VALUES (?, ?)",
+    new BatchPreparedStatementSetter() {
+
+        @Override
+        public void setValues(PreparedStatement ps, int i)
+                throws SQLException {
+
+            ps.setInt(1, i + 1);
+            ps.setString(2, "User" + i);
+        }
+
+        @Override
+
+public int getBatchSize() {
+            return 5;
+        }
+    }
+);
+
+3. Batch Update with Update Query
+
+
+jdbcTemplate.batchUpdate(
+    "UPDATE users SET name=? WHERE id=?",
+    List.of(
+        new Object[]{"John Updated", 1},
+        new Object[]{"Alice Updated", 2}
+    )
+);
+
+✅ Improves performance
+✅ Reduces database round trips
+✅ Efficient for large data inserts
+✅ Saves network time
+
+✅ Use when:
+
+Large number of inserts/updates
+Performance matters
+Bulk operations

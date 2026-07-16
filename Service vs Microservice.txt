@@ -1,0 +1,29 @@
+Service vs Microservice
+Service (General)
+A service is a broad term — it simply means any software component that provides functionality to other components over a network. It can be big or small, loosely or tightly coupled, and has no strict rules about size or responsibility.
+Examples: A single backend server handling login, payments, user profiles, and orders all together — that whole thing is still called a "service."
+
+Microservice
+A microservice is a specific type of service that follows strict design principles:
+PrincipleWhat it meansSingle ResponsibilityDoes one thing only (e.g., only handles payments)Independent DeploymentCan be deployed without touching other servicesOwn its DataHas its own dedicated databaseSmall & FocusedSmall enough for one team to own and understand fullyLoosely CoupledChanges in one don't break others
+
+Simple Analogy
+Think of a restaurant:
+
+A service = the entire restaurant (one place handles cooking, billing, serving, cleaning)
+Microservices = specialized staff — a chef only cooks, a waiter only serves, a cashier only bills. Each person has one job, works independently, and can be replaced without shutting down the whole restaurant.
+
+
+Key Difference in One Line
+
+A service is any deployable unit of functionality. A microservice is a small, independently deployable service with a single, well-defined responsibility.
+
+
+When does a Service become a Microservice?
+A service qualifies as a microservice when it follows these rules:
+
+It handles only one business capability (not multiple)
+It has its own database (no sharing)
+It can be deployed independently
+It communicates via APIs or events
+It is owned end-to-end by a small team

@@ -1,0 +1,472 @@
+1. What are the four pillars of OOP?
+Answer:
+The four core principles of OOP are:
+
+Encapsulation – Binding data and methods into a single unit (class) and restricting access using access modifiers.
+Inheritance – Acquiring properties and behaviors of one class by another.
+Polymorphism – One interface, many implementations (method overloading & overriding).
+Abstraction – Showing only essential details and hiding internal implementation.
+
+
+2. What is Encapsulation? Why is it important?
+Answer:
+Encapsulation means wrapping data (variables) and code (methods) together and restricting direct access using private fields and public getters/setters.
+It ensures:
+
+Data protection
+Controlled access
+Flexibility to modify implementation without affecting external code
+
+
+3. What is Abstraction? How is it implemented?
+Answer:
+Abstraction means hiding internal implementation details and exposing only essential features.
+Java provides abstraction via:
+
+Abstract classes
+Interfaces
+
+
+
+4. What is Inheritance? Types of inheritance in Java.
+Answer:
+Inheritance allows one class to reuse and extend another class.
+Types:
+
+Single
+Multilevel
+Hierarchical
+(Java does not support multiple inheritance with classes, only via interfaces.)
+
+
+5. What is Polymorphism?
+Answer:
+Polymorphism means a single function behaving differently in different situations.
+Types:
+
+Compile-time → Method Overloading
+Runtime → Method Overriding
+
+
+6. Difference between Overloading and Overriding.
+Overloading:
+
+Same method name, different parameters
+Compile-time
+Can change return type
+Same class
+
+Overriding:
+
+Same method signature in parent & child class
+Runtime
+Return type must be same or covariant
+Requires inheritance
+
+
+
+7. Difference between Interface and Abstract Class.
+Interface:
+
+100% abstract until Java 7
+Supports default & static methods (Java 8+)
+Supports multiple inheritance
+Fields are public static final
+
+Abstract Class:
+
+Can have abstract + non-abstract methods
+Cannot support multiple inheritance
+Can have instance variables
+
+
+
+8. What is a Constructor? Types.
+Answer:
+A constructor is a special method used to initialize an object.
+Types:
+
+Default constructor
+Parameterized constructor
+Java-style copy constructor (via custom constructor)
+
+
+ 9. Why doesn’t Java support multiple inheritance using classes?
+Answer:
+Because of the diamond problem → ambiguity when two parent classes have the same method.
+Interfaces solve this in Java.
+
+
+10. What is super keyword?
+Answer:
+Used to:
+
+Access parent class constructor
+Access parent class method
+Access parent class fields (avoid shadowing)
+
+
+
+
+11. What is this keyword?
+Answer:
+this refers to current object.
+Used to:
+
+Resolve variable naming conflicts
+Call another constructor: this()
+Pass current object as a parameter
+
+
+ 12. Difference between == and .equals()
+== → compares reference
+.equals() → compares content/value (when overridden, e.g., String)
+
+
+ 13. What is final class, final method, final variable?
+
+final variable → constant value
+final method → cannot be overridden
+final class → cannot be inherited (e.g., String)
+
+
+14. Can a constructor be overridden?
+Answer:
+No. Constructors are not inherited, so overriding is not possible.
+
+
+15. Can an interface have a constructor?
+Answer:
+No. Interfaces cannot be instantiated; hence they cannot have constructors.
+
+
+ 16. What is the difference between Shallow Copy and Deep Copy?
+
+Shallow copy → copies only references
+Deep copy → copies object + all nested objects independently
+
+
+
+17. What is Method Hiding?
+Answer:
+If a child class defines a static method with the same signature as parent’s static method, it hides the parent method — not overriding.
+
+
+18. What is Covariant Return Type?
+Answer:
+Child class can override a method and change the return type to a subtype of the original return type.
+
+
+19. What is the Object class in Java?
+Answer:
+Object is the root class of all Java classes.
+Important methods:
+
+toString()-> is used to return the string representation of object
+equals()-> compares the content of two objects
+hashCode()->it is a method of Object class that returns an integer value(hash code) representing an object
+clone()->creates a copy of an existing object
+wait()->is used in multithreading to make thread pause and release lock until another thread notifies it.
+notify()->is used to wake up one thread that is waiting on an object
+notifyAll()-> is used to wake up all waiting threads that are waiting in the same object
+
+
+20. What is Composition vs Aggregation?
+Composition:
+
+Strong has-a relationship
+Child cannot exist without parent
+Example: House → Rooms
+
+Aggregation:
+
+Weak relationship
+Child can exist independently
+Example: Student → College
+
+
+
+21. What is an interface in Java?
+An interface is a contract that specifies what a class must do, but not how.
+It contains abstract methods, and from Java 8 onwards, also default, static, and private methods.
+
+
+22. Can an interface have a constructor? Why?
+No.
+Interfaces cannot be instantiated, so they cannot have constructors.
+
+
+23. What types of methods can an interface contain?
+
+Abstract methods (default)-> it is a method that has only method declaration and no method body
+Default methods (Java 8)->are methods inside the interface that has method body, so that the class that implements the interface can use the method without implementing again
+Static methods (Java 8)->it belongs only to the interface, not to the implementing classes //cannot be called through object
+Private methods (Java 9)-> these methods are used inside the interface to share code in default and static methods,  it can be called only inside the interface //helper methods
+
+
+24. What are default methods in an interface? Why were they introduced?
+A default method is a method with a default implementation inside an interface.
+Introduced in Java 8 so:
+
+New methods can be added to interfaces without breaking existing classes
+Useful for evolving APIs (like Collections/Streams)
+
+
+25. . What happens if two interfaces have the same default method?
+The child class must override the default method.
+Otherwise, Java gives a compile-time error due to ambiguity.
+
+
+
+26.  Can an interface contain fields? What are their default modifiers?
+Yes, but all fields are:
+
+public
+static
+final
+
+Even if you don’t write these keywords.
+
+
+
+27.  Can one interface extend another interface?
+Yes.
+Interfaces can extend multiple interfaces.
+
+
+28. Can a class implement multiple interfaces?
+Yes.
+This is how Java supports multiple inheritance of type.
+
+
+29.  Can an interface extend a class?
+No.
+Interfaces can only extend other interfaces.
+
+
+30. What is a marker interface? Give examples.
+A marker interface contains no methods — it just marks a class with metadata.
+Examples:
+
+Serializable
+Cloneable
+Remote
+
+
+31. What is tagging or empty interface?
+Same as marker interface — used to indicate metadata to JVM or compiler.
+
+
+32.  Explain multiple inheritance in interfaces.
+A class can implement multiple interfaces.
+If interface A and B define different methods, the class must implement both.
+This avoids diamond problem because actual implementation is only in the class.
+
+
+33.  Can you override Object class methods inside an interface?
+Yes.
+Interfaces can declare methods present in Object class (like equals, hashCode).
+But they cannot override them — implementing classes must provide implementation.
+
+
+
+34. Why are interface variables implicitly public static final?
+Because interfaces are meant to define constants, not instance state.
+
+
+35.  What is a functional interface?
+A functional interface contains exactly one abstract method.
+Used mainly with lambda expressions.
+Example: Runnable, Callable, Predicate, Function.
+
+
+36.  Which annotation marks a functional interface?
+@FunctionalInterface
+This ensures only one abstract method exists.
+
+
+37. What happens if you add two abstract methods to a functional interface?
+It gives a compile-time error (when annotated with @FunctionalInterface).
+
+
+38. How are functional interfaces used in lambda expressions?
+Lambda expressions provide the implementation for the single abstract method of the functional interface.
+
+
+
+39. Can a functional interface contain default or static methods?
+Yes.
+They do not count as abstract methods.
+
+
+40. What is SAM rule?
+SAM = Single Abstract Method
+A functional interface must contain only one abstract method.
+
+
+41.  Give examples of built-in functional interfaces.
+
+Predicate<T>
+Function<T, R>
+Supplier<T>
+Consumer<T>
+BiFunction<T, U, R>
+Runnable
+Callable<V>
+
+
+42. Can a functional interface extend another interface?
+Yes, as long as only one abstract method remains after inheritance.
+
+
+43.  Can two abstract methods be inherited but still form a functional interface?
+Yes — if one method overrides another.
+Then only one unique abstract method remains.
+
+
+44. What is a method reference? How is it related to functional interface?
+Method reference is a shorthand for a lambda expression.
+Since method references map to functional interface SAM, they work directly with them.
+Example types:
+
+Static method
+Instance method
+Constructor reference
+
+
+45. Why were functional interfaces introduced in Java 8?
+To enable lambda expressions, which allow:
+
+concise code
+functional programming style
+powerful Streams API
+
+
+46. Explain BiFunction, BiPredicate, UnaryOperator, BinaryOperator.
+
+BiFunction<T, U, R> → takes 2 inputs, produces result
+BiPredicate<T, U> → takes 2 inputs, returns boolean
+UnaryOperator → takes one input, returns same type
+BinaryOperator → takes 2 inputs, returns same type
+
+
+47. What is collection framework?
+
+The Java Collection Framework (JCF) is a set of classes and interfaces in Java designed to store, manage, and manipulate groups of data efficiently.
+
+48. What is diff between HashMap and concurrentHashMap?
+
+A HashMap is not thread‑safe, which means multiple threads can modify it at the same time and this may lead to data inconsistency. 
+
+A ConcurrentHashMap, on the other hand, is designed for multi‑threaded environments and allows safe concurrent access without corrupting data.
+A HashMap works without any kind of synchronization, but ConcurrentHashMap uses internal locking and non‑blocking techniques so that multiple threads can read and write simultaneously with high performance. Because of this, ConcurrentHashMap is much safer and more efficient than manually synchronizing a HashMap.
+
+
+49. How to map list or map into synchronized one.
+
+You can make a normal List or Map synchronized by wrapping it with Collections.synchronizedList() or Collections.synchronizedMap(), which returns a thread‑safe version of the original collection. 
+
+
+50. diff Synchronized list and Asynchronous Map 
+
+A synchronized list is a thread‑safe wrapper created using Collections.synchronizedList(), while an asynchronous map (like ConcurrentHashMap) is inherently designed for concurrency and allows multiple threads to operate without blocking the entire map.
+
+
+
+51. What are Sequential and parallel Streams
+A sequential stream processes elements one by one in a single thread, while a parallel stream splits the data into multiple parts and processes them simultaneously across multiple threads to improve performance on large workloads.
+
+
+52. Can we use synchronized block for primitive types?
+No, we cannot use a synchronized block on primitive types because synchronized always requires an object reference, so we must synchronize on an object like Integer, String, or a custom lock object—not on primitives like int or boolean.
+
+
+53. What are static objects
+Static objects are objects referenced by static variables, meaning they belong to the class itself rather than an instance, so they are created once in memory and shared across all objects of that class.
+
+
+54. 1. What is a Stream in Java 8?
+A Stream is a pipeline that processes data in a functional style without storing elements, allowing operations like filtering, mapping, and reducing on collections.
+
+55.What are intermediate and terminal operations?
+Intermediate operations return a new stream and are lazy, while terminal operations produce a result and end the stream pipeline.
+
+56. 3. What is the difference between map and flatMap?
+map() transforms each element into another value, whereas flatMap() transforms each element into a stream and flattens all streams into one.
+
+
+57. What is laziness in Streams?
+Laziness means intermediate operations do not execute until a terminal operation is invoked.
+
+
+58. What is a terminal operation?
+A terminal operation triggers the execution of the stream pipeline and returns a result like a value, list, count, or optional.
+
+
+59.  What is the difference between Stream and Collection?
+A Collection stores data, but a Stream processes data; Streams are lazy, single‑use, and do not modify the source.
+
+
+60. What are sequential and parallel streams?
+Sequential streams run in a single thread, while parallel streams divide work across multiple threads for faster processing.
+
+
+61. What is reduce() used for?
+reduce() combines elements into a single value like sum, min, max, or concatenation using an accumulator function.
+
+62. What is collect() used for?
+collect() is used to accumulate stream results into collections like List, Set, Map or for advanced grouping and partitioning.
+
+
+63. 10. What is the difference between findFirst() and findAny()?
+findFirst() returns the first element in an ordered stream, while findAny() may return any element and is optimized for parallel streams.
+
+64. What is short‑circuiting in Streams?
+Operations like anyMatch, allMatch, findFirst, and limit stop processing once the result is determined.
+
+65. 12. What is the use of filter()?
+filter() removes elements that do not satisfy a given condition and returns a stream of matching elements.
+
+
+66. What is the use of sorted()?
+sorted() sorts stream elements either using natural order or a custom comparator.
+
+67.  What is the difference between forEach() and forEachOrdered()?
+forEach() may not maintain order in parallel streams, while forEachOrdered() always processes elements in encounter order.
+
+
+68. Why should we avoid using mutable shared state in Streams?
+Because Streams expect side‑effect‑free operations, and modifying shared state can cause incorrect results, especially in parallel streams.
+
+
+69. Can we reuse a Stream?
+No, once a terminal operation is executed, the stream is consumed and cannot be reused.
+
+70. What is Optional in Java 8 Streams?
+Optional is a wrapper that may or may not contain a value, helping to avoid null checks and NullPointerException.
+
+
+71. What is Collectors.groupingBy()?
+It groups stream elements based on a classifier function and returns a Map of grouped data.
+
+
+72. What is Collectors.partitioningBy()?
+It divides elements into two groups (true and false) based on a boolean condition.
+
+
+73.What are primitive streams?
+Streams like IntStream, LongStream, and DoubleStream provide specialized operations and avoid boxing overhead.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

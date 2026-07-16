@@ -1,0 +1,8 @@
+String name="Anjali";
+string rev= (name);
+if(name==rev){
+System.out.println("String is palindrome");
+}
+else{
+("String is not a palindrome");
+}

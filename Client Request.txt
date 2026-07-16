@@ -1,0 +1,147 @@
+ Client Request
+      ↓
+ API Gateway        ← Single entry point (Spring Cloud Gateway)
+      ↓
+Service Discovery   ← Eureka Server (finds which service to call)
+      ↓
+ Microservice A     ← e.g., User Service (Spring Boot App)
+      ↓
+ Microservice B     ← e.g., Order Service (Spring Boot App)
+      ↓
+   Database         ← Each service has its own DB (MySQL/PostgreSQL)
+
+
+Full Project Flow — Step by Step
+
+Step 1 — Eureka Server (Service Registry)
+The first thing you build. All services register here so they can find each other.
+
+@SpringBootApplication
+@EnableEurekaServer          // Makes this the registry
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+Step 2 — Build a Microservice (e.g., User Service)
+Every microservice follows this internal structure:
+
+user-service/
+ ├── controller/       ← Handles HTTP requests (REST endpoints)
+ ├── service/          ← Business logic
+ ├── repository/       ← Database access (JPA)
+ ├── model/            ← Data classes (Entity)
+ ├── dto/              ← Data Transfer Objects
+ └── application.yml   ← Config (port, DB, Eureka)
+
+Step 3 — API Gateway (Spring Cloud Gateway)
+Routes incoming requests to the correct microservice.
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service       # lb = load balanced via Eureka
+          predicates:
+            - Path=/users/**
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/orders/**
+
+Step 4 — Inter-Service Communication
+When Order Service needs data from User Service:
+Option A — Feign Client (Synchronous):
+Option B — Kafka (Asynchronous):
+java// Order Service publishes an event
+kafkaTemplate.send("order-placed", new OrderEvent(orderId, userId));
+
+// User Service listens
+@KafkaListener(topics = "order-placed")
+public void handleOrderPlaced(OrderEvent event) {
+    // process event
+}
+
+Step 5 — Exception Handling
+Centralized error handling across the service:
+java@RestControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
+}
+
+Step 6 — Security (Spring Security + JWT)
+Each request carries a JWT token. The Gateway validates it before forwarding.
+Client → sends JWT token in header
+         ↓
+API Gateway validates token
+         ↓
+Forwards clean request to microservice
+
+Step 7 — Containerize with Docker
+Each Spring Boot service gets a Dockerfile:
+dockerfileFROM openjdk:17-jdk-slim
+COPY target/user-service.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+services:
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+
+Step 8 — Deploy to Kubernetes
+yamlapiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+        - name: user-service
+          image: user-service:latest
+          ports:
+            - containerPort: 8081
+
+
+
+ Complete Flow Summary
+
+Step	Component	       Tool/Tech
+1	Service Registry	Eureka Server
+2	Individual Services	Spring Boot + JPA
+3	API Routing	       Spring Cloud Gateway
+4	Service Communication	Feign Client / Kafka
+5	Error Handling	        @RestControllerAdvice
+6	Security	        Spring Security + JWT
+7	Containerization	Docker + Docker Compose
+8	Orchestration	        Kubernetes
+

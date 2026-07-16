@@ -1,0 +1,48 @@
+Service Registry
+
+Simple Definition
+A Service Registry is like a phone directory for microservices. It keeps track of all running services — their names, locations (IP address + port), and health status — so services can find and talk to each other without hardcoding addresses.
+
+How It Works — 3 Simple Steps
+
+1. REGISTER          2. DISCOVER                       3. CALL
+─────────────   ─────────────      ──────────────
+Service starts   →   Another service       →   Direct call is
+and registers        asks registry           made to the
+itself with          "where is              resolved address
+the registry         user-service?"
+(name + IP + port)   Registry returns
+                     the address
+
+
+Two Types of Discovery
+Client-Side Discovery (Eureka)
+The client asks the registry and decides which instance to call.
+Order Service → asks Eureka → gets list of User Service instances → picks one → calls it
+Server-Side Discovery (Kubernetes DNS)
+The infrastructure handles it. You call a service name and the platform routes it.
+Order Service → calls "user-service" → Kubernetes routes to the right pod automatically
+
+
+
+
+┌─────────────────────────────────┐
+│         Eureka Server           │
+│  ┌──────────────────────────┐   │
+│  │ user-service → port 8081 │   │
+│  │ order-service → port 8082│   │
+│  │ payment-service → 8083   │   │
+│  └──────────────────────────┘   │
+└─────────────────────────────────┘
+         ↑ register          ↓ discover
+   [User Service]       [Order Service]
+
+
+
+Key Features of a Service Registry
+Feature	        What it Does
+Registration	Services add themselves when they start
+Deregistration	Services remove themselves when they stop
+Health Check	Registry pings services to check if they are alive
+Load Balancing	If 3 instances of a service exist, it distributes calls
+Heartbeat	Services send a pulse every 30 seconds to say "I'm alive"

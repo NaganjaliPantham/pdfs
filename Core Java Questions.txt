@@ -1,0 +1,175 @@
+Core Java Questions
+
+
+Difference between HashMap and ConcurrentHashMap.
+ 
+Explain equals() and hashCode() contract.
+ 
+Difference between ArrayList and LinkedList.
+ 
+What is immutability? How do you create an immutable class?
+ 
+Difference between checked and unchecked exceptions.
+ 
+What are functional interfaces?
+ 
+What is the difference between == and equals()?
+ 
+Difference between method overloading and method overriding.
+ 
+Life cycle of threads.
+ 
+Explain access modifiers.
+ 
+Basic programs on strings.
+
+
+
+
+Spring Boot Fundamentals
+
+
+
+What happens internally when a Spring Boot application starts?
+ 
+Difference between @Component, @Service, and @Repository.
+ 
+What is dependency injection and why is it important?
+ 
+Constructor injection vs field injection.
+ 
+Difference between @Bean and @Component.
+ 
+How does Spring Boot auto‑configuration work?
+ 
+How do you handle validation in Spring Boot?
+ 
+How do you handle global exceptions?
+ 
+What is @RestControllerAdvice?
+ 
+How do you externalize configuration in Spring Boot?
+ 
+Explain annotations in Spring Boot.
+
+Microservices (Eureka, Feign, Gateway)
+What is Eureka Server and why is it needed?
+  
+How does service discovery work?
+ 
+What is API Gateway and its responsibilities?
+ 
+How does API Gateway route requests?
+ 
+What is Feign Client and why did you use it?
+ 
+How does Feign integrate with Eureka?
+ 
+What is client‑side load balancing?
+
+
+
+
+Spring Security
+
+
+
+
+Difference between authentication and authorization.
+ 
+Explain Spring Security flow in your project.
+ 
+How did you implement JWT authentication?
+ 
+Where is JWT validated — Gateway or service?
+ 
+What is SecurityFilterChain?
+ 
+How do you restrict access based on roles?
+ 
+Difference between 401 and 403 errors.
+ 
+How do you secure REST APIs?
+ 
+How do you store and validate passwords?
+
+
+
+
+Testing (JUnit & Mockito)
+
+
+
+
+Difference between unit testing and integration testing.
+ 
+What is Mockito and why is it used?
+ 
+Difference between @Mock and @InjectMocks.
+ 
+How do you test REST controllers?
+ 
+How do you mock external service calls?
+ 
+How do you test exception scenarios?
+
+
+
+
+Docker
+
+
+
+
+What is Docker and why is it used?
+ 
+Difference between Docker image and container.
+ 
+Explain the Dockerfile you used.
+ 
+What is Docker Compose?
+
+
+
+
+SQL
+
+
+
+
+Basic SQL queries using WHERE, GROUP BY, HAVING.
+
+ 
+Mock Questions
+=======================
+ 
+What is the difference between RestTemplate and Feign Client?
+what are actuators
+Hibernate entity relationship Cascade purpose?
+What is backpressure?
+ 
+-----------------------------------------------------
+What is immuatable object?
+Difference between String and String Buffer
+== and equals()
+checked exception and unchecked exception
+instance method and static methods
+access modifiers
+overloading vs overriding
+Purpose of Generics
+List and Set
+ArrayList and LinkedList
+HashSet and TreeSet 
+Comparable and Comparator
+static polymorphishm and dynamic polymorphishm
+HashMap and TreeMap
+Multi Threading?
+functional interfaces
+ 
+----------------------------------------------------
+ 
+Access modifiers
+overloading vs overriding
+== and equals()
+ 
+ 	

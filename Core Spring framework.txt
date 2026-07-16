@@ -1,0 +1,207 @@
+Core Spring framework
+
+
+Inversion of Control (IoC)
+Dependency Injection (DI)
+    Constructor Injection
+    Setter Injection
+Bean Lifecycle
+Bean Scopes
+    Singleton
+    Prototype
+    Request, 
+    Session
+    Application
+    Websocket
+BeanFactory vs ApplicationContext
+Autowiring
+    @Autowired
+    @Qualifier
+    @Primary
+
+Spring Configuration
+
+XML-based configuration
+Java-based configuration (@Configuration)
+Annotation-based configuration
+Component Scanning (@ComponentScan)
+@Bean annotation
+@Value annotation (property injection)
+Profiles (@Profile)
+
+Spring Annotations (Core)
+
+@Component
+@Service
+@Repository
+@Controller
+@Autowired
+@Value
+@Bean
+@PostConstruct / @PreDestroy
+
+Spring Expression Language (SpEL)
+
+Basic expressions #{}
+Accessing bean properties
+Method calls
+Conditional expressions
+Using SpEL in @Value
+
+Spring Bean Lifecycle
+
+Initialization
+Destruction
+Lifecycle callbacks:
+InitializingBean
+DisposableBean
+@PostConstruct, @PreDestroy
+
+Spring JDBC
+
+JdbcTemplate
+RowMapper
+Exception handling
+JDBC vs ORM
+JDBC vs Spring JDBC
+Batch updates
+
+
+
+
+Spring Boot
+
+🔹 Fundamentals
+Spring Boot architecture
+Starter dependencies
+Auto-configuration
+🔹 Core Features
+application.properties / yaml
+Profiles
+Embedded servers (Tomcat)
+🔹 Spring Boot in Depth
+@SpringBootApplication
+Auto-configuration internals
+Custom auto-configuration
+Actuator (monitoring)
+Logging
+
+
+Web Applications in Spring
+
+🔹 Spring MVC
+DispatcherServlet flow
+Controllers (@RestController)
+Request mapping (@GetMapping, etc.)
+Path variables, query params
+🔹 REST APIs
+@RequestBody, @ResponseBody
+ResponseEntity
+Exception handling (@ControllerAdvice)
+
+
+Spring AOP
+
+Aspect-Oriented Programming concepts
+Cross-cutting concerns
+Advice types:
+Before
+After
+Around
+Join Points & Pointcuts
+@Aspect annotation
+Real-time use cases (logging, security, transactions)
+
+
+Spring JPA (Spring Data JPA)
+
+🔹 Basics
+ORM concepts
+Entities (@Entity)
+Repositories (JpaRepository)
+🔹 Mapping
+One-to-One
+One-to-Many
+Many-to-One
+Many-to-Many
+🔹 Advanced
+JPQL & native queries
+Pagination & sorting
+Cascade types
+Fetch types (LAZY vs EAGER)
+Transactions (@Transactional)
+
+
+Testing (JUnit + Mockito)
+
+🔹 JUnit
+Test basics
+Assertions
+Test lifecycle
+🔹 Mockito
+@Mock, @InjectMocks
+Stubbing (when().thenReturn())
+Verification (verify())
+
+JUnit Testing with Spring
+
+@SpringBootTest
+@WebMvcTest (controller testing)
+@DataJpaTest (repository testing)
+MockMvc
+Testing REST APIs
+Integration testing vs unit testing
+
+Maven & Eclipse (Basic)
+
+🔹 Maven
+pom.xml structure
+Dependencies
+Build lifecycle
+Plugins
+🔹 Eclipse/IDE Basics
+Project setup
+Debugging
+Running applications
+
+
+Spring Security
+
+🔹 Basics
+Authentication vs Authorization
+SecurityFilterChain
+Password encoding (BCrypt)
+🔹 Advanced
+JWT authentication
+Method-level security (@PreAuthorize)
+Role-based access
+Filters
+
+
+OAuth (Security Advanced)
+
+OAuth 2.0 basics
+Authorization server
+Resource server
+Grant types:
+Authorization Code
+Client Credentials
+Access token vs Refresh token
+Integration with Spring Security
+
+
+Spring Cloud Services (Microservices)
+
+🔹 Core Concepts
+Microservices architecture
+Service discovery
+🔹 Common Tools
+Eureka (service registry)
+Spring Cloud Gateway (API Gateway)
+Config Server (central config)
+Feign Client (service-to-service calls)
+🔹 Advanced
+Circuit Breaker (Resilience4j)
+Load balancing
+Distributed tracing (Sleuth)
+

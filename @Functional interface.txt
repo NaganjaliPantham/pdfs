@@ -1,0 +1,24 @@
+@Functional interface
+Functional Interface (Features added in java 1.8)
+if an interface contains only one abstract method, that is functional interface
+unanimous classes --> consumer c2=new consumer by this command we can create unanimous class like
+consumer c2= new consumer(){
+public void consume(String s){
+System.out.println(s.toUppercase())                  ----->unanimous class
+}};
+consumer c3=(String s)->{
+System.out.println(s.toLowerCase)                      ---->Lambda Expression
+};
+
+
+
+
+public class StackImp<T>{
+object[] arr
+public StackImp(int size){
+arr= new Object[size];
+}                                                         -------------->Generic classes
+void push(T v){
+arr[index]=v;
+
+

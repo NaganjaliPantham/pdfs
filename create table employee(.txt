@@ -1,0 +1,7 @@
+create table employee(
+id int,
+name text,
+city text,
+gender text,
+salary double,
+constraint emp_id_pk primary key(id) );

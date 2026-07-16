@@ -1,0 +1,117 @@
+1. write a program to check occurance of a character in a given string
+2. check whether string is anagram or not
+3. Diff between HashMap and concurrent HashMap
+4. How to map list or map into synchronized one.
+5. How can you stabilize map or list in multi threading environment
+6. diff Synchronized list and Asynchronous Map 
+7. Can we use synchronized block for primitive types?
+8. What are static objects
+9. What are intermediate and terminal operations in streams
+10. Diff between Thread and Runnable
+11. What is Data Structures
+12. Program to count the occurence of characters in the given string
+13. How to reverse a string without using pre defined methods
+14. What are diff between Override and Overloading
+15. Can we Override the static methods in a class and in a interface
+16. What is diff between compile time and runtime excetions
+17. What are methods available in object class
+18. in which package object is present
+19. What are the classes in util package
+20. Diff between Collection interface and Collections class
+21. diff between HashMap and concurrent HashMap, when to choose each of them
+22. what are OOPS concepts in Java
+23. What is polymorphism
+24. Diff between method overloading and overriding
+25. use of static keyword
+26. Types of access modifiers in java
+27. Java8 features
+28. what are collections
+29. what is collection interface
+30. Program to implement BubbleSort and MergeSort
+
+
+1. java 8,17,21
+2. collection and which type of collection
+3. map is having an existing value 101-reshmi if 101-nikhitha added then what happens
+102-nikhitha added then what is the result
+
+4. functional interface
+5. mention few in-built functional interface
+6. difference between map and flatmap 
+7. difference between comparable and comparator
+8. equals and hashcode equals and hashcode, rule between equals and hashcode
+9. two strings are equal by hashcode then will they be equal by equals
+10. two strings are equal by equals then will there hashcode be same
+11. exception hierachy
+12. types of exceptions
+13. how to handle unchecked exceptions
+14. difference between checked and unchecked
+15. what default method
+
+
+1. self intro
+2. Java 8,17,21 features
+3. List,map,set when to use
+4. Map you have one key, again same key is being entered what will happen.
+5. what are Comparable and comparator
+6. explain Map and flat map
+7. What are intermediate and terminal operations 
+8. Foreach is intermediate or terminal 
+9. Lambda expression example
+10. Functional interface 
+11. What is record 
+12. String builder and buffer
+13. Exception and where to use in code
+14. Try catch
+15. Throw and throws
+16. what are Checked and unchecked
+17. When you use throws can you handle it somewhere else and how to handle it
+
+
+1. Streams in java 8
+2. Intermediate and terminal operation in streams
+3. Difference between flat and flatmap
+4. What is functional interface
+5. When we should use string stringbuffer and stringbuilder
+6. Collection all the collections
+7.  when we use arraylist and when we use linkedlist
+8. How map works internally
+9. I have map of integer and stream and there is one entry in the map and I am adding another entry with same key then what will happen
+10. When we will use comparator and when we will use comparable
+11. Tell me exception hierarchy
+12. Let's see u have checked exception how do u handle it
+13. Why do we use finally
+
+1. Java 8 features
+2. Java 17 features
+3. Java 21 features
+4. What are the collections we use
+5. When we use list
+6. When we use set
+7. When we use arraylist
+8. When we use linkedlist
+9. U have map - id as key and value as name -
+	1st entry is 1 and Rashmi
+	2nd entry is 1 and likhitha
+	Then what will happen
+	will it override ?
+
+10. How to add that 2nd entry without override
+11. Difference between mal and flat map
+12. How string is immutable - demonstrate in notepad
+13. Difference between string string builder and string buffer
+14. Explain about string constant pool
+15. Functional interfaces in Java 8
+16. About lambda expression
+17. Difference between equals() and ==
+18. Explain about predicate, function, consumer and supplier
+19. Use of filter ()
+20. Exception hierarchy
+21. What is throwable
+22. Difference between throw and throws
+23. Checked and unchecked exceptions
+24. Can we create our own custom exception and how
+25. Create student not found exception
+26. Your application is throwing checked exception, what we need to do?
+27. How u handle the exceptions
+28. Explain about finally block
