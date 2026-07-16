@@ -1,5 +1,208 @@
 Spring Boot
+Spring Boot is a framework built on top of Spring that helps you create applications quickly with minimal configuration.
 
-1)Superset of Spring (DI)
-2)Speed App Development(RAD)
-3)Comes with
+✔ No XML configuration
+✔ Embedded server (Tomcat)
+✔ Auto-configuration
+✔ Faster development
+
+Key Goals of Spring Boot
+✅ Reduce configuration
+✅ Enable fast development
+✅ Provide production-ready features
+ 
+1. Auto-Configuration
+👉 Automatically configures beans based on dependency
+✔ No manual setup needed
+2. Embedded Server
+👉 No need to install Tomcat separately
+✔ App runs directly
+3. Starter Dependencies
+👉 Ready-made dependencies
+✔ No need to add multiple libraries manually
+4. Production Ready (Actuator)
+👉 Monitoring features
+5. Minimal Configuration
+👉 Mostly configured via: application.properties
+
+Spring vs SpringBoot
+Spring requires manual configuration and setup, whereas Spring Boot simplifies development using auto-configuration, embedded servers, and starter dependencies.
+
+Architecture Flow
+
+Main Class (@SpringBootApplication)
+        ↓
+Auto Configuration
+        ↓
+Component Scanning
+        ↓
+Beans Creation
+        ↓
+Embedded Server (Tomcat)
+        ↓
+Application Starts
+
+3. Starter Dependencies
+👉 Starter dependencies are pre-configured dependency packages that include everything needed for a feature.
+
+With starters:
+One dependency → all included
+
+spring-boot-starter-web ->Spring MVC, Jackson (JSON), Embedded Tomcat
+spring-boot-starter-data-jpa
+spring-boot-starter-security
+
+Advantages
+✅ Saves time
+✅ Avoids dependency conflicts
+✅ Easy configuration
+
+ 4. Auto-Configuration
+Spring Boot automatically configures beans based on the dependencies present in the project.
+
+By adding Spring Boot automatically:
+Configures DispatcherServlet
+Configures Tomcat
+Enables REST APIs
+
+Dependency added
+      ↓
+Spring Boot checks classpath
+      ↓
+Auto-configuration triggered
+      ↓
+Beans created automatically
+
+@SpringBootApplication-> It is combination of @Configuration, @ComponentScan, @EnableAutoConfiguration
+
+@EnableAutoConfiguration
+👉 Enables auto-config feature
+
+Core Features of Spring Boot
+✅ Auto-configuration
+✅ Starter dependencies
+✅ Embedded server
+✅ External configuration
+✅ Production-ready tools
+2. application.properties / application.yml
+👉 These files are used to store configuration settings
+server.port=8081
+spring.application.name=my-app
+application.yml (YAML format)
+server:
+    port: 8081
+spring:
+    application:
+        name: my-app
+
+3. Profiles (@Profile + config)
+ Profiles help manage different environments
+4. Embedded Servers (Tomcat)
+👉 Spring Boot includes built-in web server
+Start Application
+      ↓
+Spring Boot starts Tomcat
+      ↓
+Deploys application
+      ↓
+App is running ✅
+
+@SpringBootApplication ⭐
+👉 This is the main annotation in Spring Boot.
+@SpringBootApplication is a combination annotation that enables configuration, component scanning, and auto-configuration.
+@SpringBootApplication
+      ↓
+Scan classes (@Component)
+      ↓
+Enable auto-configuration
+      ↓
+Start embedded server
+      ↓
+Application runs
+2. Auto-Configuration Internals ⭐
+👉 This is how Spring Boot automatically configures everything
+By adding this dependency:
+spring-boot-starter-webShow more lines
+Spring Boot automatically:
+Configures DispatcherServlet
+Configures Jackson (JSON)
+Starts Tomcat
+3. Custom Auto-Configuration
+👉 You can create your own auto-configured modules
+
+@Configuration
+public class MyAutoConfig {
+
+    @Bean
+    @ConditionalOnMissingBean
+    public MyService myService() {
+        return new MyService();
+    }
+}
+4. Spring Boot Actuator (Monitoring) :  Spring Boot Actuator helps monitor application health, performance, and system status using ready-made endpoints.
+👉 Provides production-ready monitoring features
+by adding spring-boot-starter-actuator-> the actuators are enabled
+
+In real applications, we need to know:
+✅ Is the app running?
+✅ Is DB working?
+✅ Memory usage?
+✅ CPU usage?
+✅ Logs and metrics?
+👉 Actuator gives all this automatically ✅
+
+1. Health
+http://localhost:8080/actuator/health-> ✔ Checks if application is running
+output->
+{"status": "UP"}
+
+2. Metrics
+/actuator/metrics-> ✔ Shows app performance (memory, CPU, etc.)
+ 3. Info
+/actuator/info-> ✔ App information
+4. Beans
+/actuator/beans-> ✔ List of all Spring beans
+5. Environment
+/actuator/env-> ✔ Environment properties
+
+
+Application starts
+       ↓
+Actuator loads monitoring endpoints
+       ↓
+Expose URLs (/actuator/*)
+       ↓
+User / DevOps can monitor app
+Logging in Spring Boot->  Spring Boot provides built-in logging support to track application behavior, errors, and execution flow.
+👉 Spring Boot provides built-in logging support
+Spring Boot uses:
+✅ Logback (default)
+✅ With SLF4J (logging API)
+In real applications:
+✅ Debug issues
+✅ Track user actions
+✅ Monitor system behavior
+✅ Identify errors
+
+Level	Purpose
+TRACE	Very detailed logs
+DEBUG	Debugging
+INFO	Normal flow ✅
+WARN	Warnings
+ERROR	Errors
+
+ Configure Logging (application.properties)
+
+logging.level.root=INFO
+logging.level.com.myapp=DEBUG
+ Root → overall log level
+Package-specific logging
+
+Logging in Spring Boot
+Controller
+   ↓ log.info()
+Service
+   ↓ log.debug()
+Repository
+   ↓ log.error()
+Logs printed in console or file

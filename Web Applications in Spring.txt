@@ -1,0 +1,188 @@
+Web Applications in Spring
+
+Spring web applications are built using Spring MVC or Spring Boot to handle HTTP requests, process business logic, and return responses.
+
+**1. Spring MVC->**used to build web applications and REST APIs.
+Spring MVC is a web framework that follows the MVC pattern to handle HTTP requests, process them, and return responses.
+
+Model → Data(Business logic)
+View → UI (HTML / JSON)
+Controller → Handles requests
+
+ **2. DispatcherServlet ->**DispatcherServlet is the central front controller in Spring MVC that receives all requests and routes them to the appropriate controller.
+👉 DispatcherServlet is the front controller in Spring MVC
+👉 It handles all incoming HTTP requests and decides:
+Which controller should handle them
+What response to return
+
+Complete DispatcherServlet Flow
+
+Client (Browser/Postman) ->(GET/users/1)
+        ↓
+1. DispatcherServlet (Front Controller)  ->DispatcherServlet receives request
+        ↓
+2. HandlerMapping -> @RequestMapping / @GetMapping lookup -> ex:GetMapping("/users/{id}")
+        ↓
+3. Controller (executes)
+        ↓
+4. Service Layer(Business logic)
+        ↓
+5. Repository / Database (Repository ,fetch data from db)
+        ↓
+6. Controller returns response -> return "user 1";
+        ↓
+7. DispatcherServlet processes response   (sent back to client ->user 1)
+        ↓
+Response sent to Client
+
+Controllers (@RestController)
+
+@Controller is a Spring annotation used to handle web requests and return views (HTML pages).
+
+eturns view (UI page)
+✅ Used in traditional web apps
+✅ Works with:
+
+JSP
+Thymeleaf
+@RestController-> @Controller + @ResponseBody
+
+@RestController is used in Spring to create REST APIs that return data (JSON or text) instead of HTML pages.
+👉 Automatically converted to JSON ✅
+
+Client Request → @RestController
+               → Method executes
+               → Return object/string
+               → Spring converts to JSON
+               → Response sent to client
+
+Annotations in Spring MVC
+Spring MVC annotations are used to map HTTP requests to controller methods and handle web application flow.
+
+@RequestMapping (Base Annotation) : @RequestMapping is the main annotation in Spring MVC used to map HTTP requests (URLs) to controller methods.
+
+1. @GetMapping
+👉 Used to handle GET requests
+👉 Used to fetch data
+2. @PostMapping
+👉 Used to handle POST requests
+👉 Used to create new data
+3. @PutMapping
+👉 Used to handle PUT requests
+👉 Used to update existing data
+4. @DeleteMapping
+👉 Used to handle DELETE requests
+👉 Used to delete data
+
+@GetMapping, @PostMapping, @PutMapping, and @DeleteMapping are shortcut annotations in Spring MVC used to map HTTP methods to controller methods for CRUD operations.
+
+**@PathVariable:**filter/search
+👉 @PathVariable is used to extract values from the URL path in a Spring controller.
+
+@GetMapping("/users/{id}")
+public String getUser(@PathVariable int id) {
+    return "User ID: " + id;
+}
+
+**@RequestParam:**identify resource
+👉 @RequestParam is used to get values from query parameters (key-value pairs) in the URL.
+
+
+@GetMapping("/users")
+public String getUser(@RequestParam String name) {
+    return "User Name: " + name;
+}
+URL->/users?name=John
+
+
+
+REST APIs
+
+REST (Representational State Transfer) API is a way for applications to communicate over HTTP using standard methods like GET, POST, PUT, DELETE.
+
+👉 Client ↔ Server communication
+Example:
+
+Frontend → sends request
+Backend (Spring Boot) → processes and returns response
+
+Client (Browser/Postman)
+        ↓ HTTP Request
+Spring Controller (@RestController)
+        ↓ processes request
+Business Logic (Service)
+        ↓
+Database (Repository)
+        ↓
+Response returned (JSON)
+
+
+Request
+GET /users/1
+
+Response (JSON)
+{
+  "id": 1,
+  "name": "John"
+}
+
+👉 REST follows some basic rules:
+✅ Stateless → each request is independent
+✅ Uses HTTP methods
+✅ Uses URLs for resources
+✅ Returns JSON/XML
+
+1. @RequestBody
+👉 Used to read data from the HTTP request body (usually JSON) and convert it into a Java object
+
+@PostMapping("/users")
+public User createUser(@RequestBody User user) {
+    return user;
+}
+
+2. @ResponseBody
+👉 @ResponseBody is used to send data (Java object or string) directly in the HTTP response instead of returning a view (HTML page).
+👉 Used to send data (Java object or string) directly as HTTP response (usually JSON)
+
+Client sends JSON
+        ↓
+@RequestBody converts → Java object
+        ↓
+Controller processes
+        ↓
+@ResponseBody converts → JSON
+        ↓
+Client receives response
+
+
+ResponseEntity
+
+ResponseEntity is used to represent the full HTTP response, including:
+
+✅ Body (data)
+✅ Status code (200, 404, etc.)
+✅ Headers
+ResponseEntity is used in Spring to return HTTP responses with status codes, headers, and body.
+
+Code	Meaning
+200	OK ✅
+201	Created ✅
+204	No Content ✅
+400	Bad Request
+404	Not Found
+500	Server Error
+403     Forbidden
+
+Exception handling (@ControllerAdvice)
+
+@ControllerAdvice is used to handle exceptions globally across all controllers in a centralized way.
+
+Controller throws exception
+        ↓
+@ControllerAdvice catches it
+        ↓
+@ExceptionHandler method executes
+        ↓
+ResponseEntity returned
+        ↓
+Client receives response

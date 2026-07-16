@@ -1,207 +1,297 @@
 Core Spring framework
 
+Spring:Spring Framework is an open-source, lightweight Java framework for building enterprise applications.
 
-Inversion of Control (IoC)
-Dependency Injection (DI)
-    Constructor Injection
-    Setter Injection
-Bean Lifecycle
-Bean Scopes
-    Singleton
-    Prototype
-    Request, 
-    Session
-    Application
-    Websocket
-BeanFactory vs ApplicationContext
-Autowiring
-    @Autowired
-    @Qualifier
-    @Primary
+It provides comprehensive infrastructure support — IoC, DI, AOP, MVC, Data, Security — letting developers focus on business logic instead of boilerplate code
 
-Spring Configuration
+Uses of Spring
+✅ Reducing boilerplate code
+✅ Managing object creation (IoC)
+✅ Simplifying database operations
+✅ Building web applications easily
+✅ Improving testability
 
-XML-based configuration
-Java-based configuration (@Configuration)
-Annotation-based configuration
-Component Scanning (@ComponentScan)
-@Bean annotation
-@Value annotation (property injection)
-Profiles (@Profile)
+Real-Time Use Cases
+
+Banking applications
+E-commerce apps
+Microservices
+REST APIs
+Enterprise systems
+
+Inversion of Control (IoC):  it is a design principle where the control of object creation and dependency management is transferred from the programmer to a framework
+
+Uses of IoC
+✅ Loose coupling
+✅ Easier testing (use mocks)
+✅ Better maintainability
+✅ Reusable code
+✅ Cleaner design
+
+Dependency Injection (DI): Dependency Injection is a technique where Spring automatically provides the required objects (dependencies) to a class instead of the class creating them manually.
+
+dependency:A dependency is an object that another class needs to work.
+
+Types of Dependency Injection
+
+1.Constructor Injection: it is a technique in Spring where dependencies are injected via constructor at the time of object creation.
+No need to use @Autowired
+Fields are final(immutable).
+Easier Unit Testing
+Avoids NullPointerException
+
+2.Setter Injection: it is a technique in Spring where dependencies are injected using setter methods after the object is created.
+it is used When dependency is optional
+mutable
+
+3.Field Injection: it is a way of injecting dependencies directly into class member variables using annotations like @Autowired.
+less boilerplatecode
+hidden dependencies
+After object creation
+No constructor or setter required
+Injection happens using reflection
+Very concise and easy to write
+
+
+Constructor injection is preferred because it enforces mandatory dependencies, supports immutability, and improves testability.
+Setter injection is used for optional dependencies,
+while field injection is generally discouraged due to poor testability and hidden dependencies
+
+
+Bean: Bean is simply an object that is created, managed, and controlled by the Spring container
+
+Bean is created
+->using @Component
+->using @Bean
+->using XML <bean>
+
+Bean Lifecycle in Spring
+
+Bean lifecycle in Spring is the process of bean creation, initialization, usage, and destruction managed by the Spring container.
+
+Complete Bean Lifecycle Flow
+
+1. Bean Instantiation (object creation) (using @Component)
+2. Dependency Injection (@Autowired)
+3. Bean Name Aware (set bean name)
+4. BeanFactory Aware (set beanfactory)
+   ApplicationContextAware (set application context)
+5. Pre-Initialization (@PostConstruct / BeanPostProcessor)
+   Pre-initialization is the step where Spring processes the bean before its initialization logic (like @PostConstruct) is executed.
+Spring calls BeanPostProcessor (before methods)
+Any custom logic can be applied before initialization
+postProcessBeforeInitialization(Object bean, String beanName)
+@PostConstruct is used to define a method that runs immediately after the bean is created and all dependencies are injected.
+6. Initialization (init method): Initialization is the stage where a bean is prepared for use after dependency injection, using mechanisms like @PostConstruct, afterPropertiesSet()[initializing bean interface], or init-method[xml or @bean->@Bean(initMethod = "customInit")]
+7. BeanPostProcessor (Post-Initialization): Post-initialization is the phase where Spring calls postProcessAfterInitialization() to allow custom processing of a bean after it is fully initialized.
+Spring gives a chance to:
+Modify the bean
+Wrap it (e.g., proxy)
+Add additional behavior
+AOP (Aspect-Oriented Programming)
+8. Bean Ready for Use:  Bean is fully initialized and used in application
+9. Destruction (@PreDestroy / destroy method): Destruction is the stage where Spring calls cleanup methods like @PreDestroy before destroying the bean
+@PreDestroy is used to execute cleanup logic before a Spring bean is removed from the container.
+implements disposable bean
+Define destroy method explicitly in configuration
+
+
+Bean Scope
+
+Bean scope defines the lifecycle and visibility of a bean — how many instances are created and how long they live.
+
+1. Singleton Scope (Default) ✅
+👉 Only one instance per Spring container
+@Scope("singleton")
+Shared across entire application
+2. Prototype Scope
+👉 A new instance is created every time the bean is requested
+@Scope("prototype")
+✅ Use Case
+✔ Stateful objects
+✔ Temporary objects
+3. Request Scope (Web Only)
+👉 One bean per HTTP request
+Created when request starts
+Destroyed after request ends
+@Scope(value = WebApplicationContext.SCOPE_REQUEST)/@RequestScope
+4. Session Scope (Web Only)
+👉 One bean per user session
+Shared throughout session
+Destroyed when session ends
+@Scope(value = WebApplicationContext.SCOPE_SESSION)/@SessionScope
+✅ Use Case
+✔ User login data
+✔ Shopping cart
+5. Application Scope (Web Only)
+👉 One bean per ServletContext (entire application)
+Shared across all users
+Lives until application stops
+@Scope(value = WebApplicationContext.SCOPE_APPLICATION)/@ApplicationScope
+ 6. WebSocket Scope
+👉 One bean per WebSocket session
+@Scope("websocket")
+Created per WebSocket connection
+Destroyed when connection closes
+Real-time apps (chat, notifications)
+
+BeanFactory: it is the core interface in Spring that manages the creation, configuration, and lifecycle of beans.
+Bean is created only when getBean() is called
+Key Features
+✅ Lazy initialization (default):creates only when needed
+✅ Lightweight container
+✅ Basic IoC functionalities
+✅ Suitable for simple applications
+
+ApplicationContext: it is an advanced Spring IoC container that manages bean creation, dependency injection, and provides additional features like AOP, events, and internationalization.
+It is built on top of BeanFactory but provides more powerful features
+Key Features
+✅ 1. Eager Initialization
+👉 Beans are created at startup
+✅ 2. Dependency Injection
+👉 Automatically injects dependencies
+✅ 3. AOP Support
+✅ 4. Event Handling
+✅ 5. Internationalization (i18n)
+👉 Supports multiple languages
+Types of ApplicationContext
+✅ 1. ClassPathXmlApplicationContext
+✅ 2. AnnotationConfigApplicationContext
+✅ 3. Spring Boot (Most Common)(Automatically creates)
+
+ApplicationContext vs BeanFactory
+In real projects, we use ApplicationContext instead of BeanFactory because it provides additional enterprise-level features like AOP and event handling.
+
+Autowiring: it  is the mechanism by which Spring automatically resolves and injects dependent beans into a class.
+
+@Autowired
+👉 Used to automatically inject dependencies by type
+Optional:@Autowired(required = false)
+
+@Qualifier
+👉 Used to resolve ambiguity when multiple beans of same type exist
+Works with @Autowired
+Specifies exact bean name
+Used when multiple implementations exist
+
+@Primary
+👉 Marks a bean as the default choice when multiple candidates exist
+Used on class level
+Avoids using @Qualifier everywhere
+Only one bean should be marked as @Primary
+
+@Inject (JSR-330 Standard)
+👉 Standard Java annotation (not Spring-specific)
+
+
+Spring Configuration: it is the process of defining beans and their dependencies so that the Spring container can manage them.
+
+
+1. XML-Based Configuration (Old Style): it is an approach where Spring beans and their dependencies are defined in an XML file and managed by the Spring container.
+
+2.Java-based configuration (@Configuration): Java-based configuration uses @Configuration and @Bean annotations to define and manage beans in Spring using pure Java code instead of XML
+@Configuration: Marks a class as configuration class
+@Bean: Declares a Spring-managed bean
+@ComponentScan: Scans packages for components
+
+3.Annotation-based configuration: Annotation-based configuration in Spring is a modern approach where we use annotations like @Component, @Autowired, etc., to configure and manage beans without XML.
+
+Why Annotation-Based Configuration?
+✅ Removes XML configuration
+✅ Cleaner and more readable
+✅ Less boilerplate code
+✅ Easier to maintain
+
+Component Scanning (@ComponentScan): @ComponentScan tells Spring to scan a package and automatically create beans for classes annotated with @Component, @Service, @Repository, and @Controller
+With it ✅:
+Spring automatically detects and registers beans
+
+@ComponentScan → Scan package
+        ↓
+Find classes with:
+    - @Component
+    - @Service
+    - @Repository
+    - @Controller
+        ↓
+Create beans
+        ↓
+Store in ApplicationContext
+
+1. @Bean Annotation: @Bean is used to create and register a Spring bean explicitly in a @Configuration class.
+
+2. @Value Annotation (Property Injection): @Value injects external configuration values into Spring beans.
+
+3. @Profile: @Profile is used to run different code for different environments like dev, test, or production.
+to activate profile: spring.profiles.active=dev
+@Profile helps Spring run different beans based on environment (dev, prod, etc.).
+
+@Profile("dev")  → used during development
+@Profile("prod") → used in production
+
+We use @Profile to switch between dev and production configurations, especially for database setup.
 
 Spring Annotations (Core)
 
+1. @Component
+👉 Marks a class as a Spring bean
+ Spring creates object automatically
+2. @Service
+👉 Same as @Component, but used for business logic layer
+Just for better readability
+3. @Repository
+👉 Used for database layer
+Adds DB exception handling
+ 4. @Controller
+👉 Used in web layer (MVC)
+Handles HTTP requests
+ 5. @Autowired
+👉 Automatically injects dependencies
+Spring gives Engine object automatically
+ 6. @Value
+👉 Used to read values from properties file
+ Injects value from config
+7. @Bean
+👉 Used to manually create a bean
+ Used when you cannot use @Component
+ 8. @PostConstruct
+👉 Runs after bean is created and dependencies are injected
+Used for initialization
+ 9. @PreDestroy
+👉 Runs just before bean is destroyed
+ Used for cleanup
+
+@Bean Created
+   ↓
+@Autowired (inject dependencies)
+   ↓
+@PostConstruct (initialize)
+   ↓
+Bean used
+   ↓
+@PreDestroy (cleanup)
+
+
+Spring Expression Language (SpEL): SpEL lets you write dynamic expressions inside Spring annotations.
+SpEL is used to evaluate expressions at runtime in Spring using #{} syntax.
+
+Basic Expressions
+ex: @Value("#{2 + 3}")
+private int sum;
+Accessing Bean Properties: Access values from another bean
+
 @Component
-@Service
-@Repository
-@Controller
-@Autowired
-@Value
-@Bean
-@PostConstruct / @PreDestroy
+class User {
+    public String name = "John";
+}
 
-Spring Expression Language (SpEL)
+@Value("#{user.name}")
+private String username;
 
-Basic expressions #{}
-Accessing bean properties
-Method calls
-Conditional expressions
-Using SpEL in @Value
+Method calls: @Value("#{T(Math).random()}")
+Conditional Expressions: @Value("#{age > 18 ? 'Adult' : 'Minor'}")
 
-Spring Bean Lifecycle
-
-Initialization
-Destruction
-Lifecycle callbacks:
-InitializingBean
-DisposableBean
-@PostConstruct, @PreDestroy
-
-Spring JDBC
-
-JdbcTemplate
-RowMapper
-Exception handling
-JDBC vs ORM
-JDBC vs Spring JDBC
-Batch updates
-
-
-
-
-Spring Boot
-
-🔹 Fundamentals
-Spring Boot architecture
-Starter dependencies
-Auto-configuration
-🔹 Core Features
-application.properties / yaml
-Profiles
-Embedded servers (Tomcat)
-🔹 Spring Boot in Depth
-@SpringBootApplication
-Auto-configuration internals
-Custom auto-configuration
-Actuator (monitoring)
-Logging
-
-
-Web Applications in Spring
-
-🔹 Spring MVC
-DispatcherServlet flow
-Controllers (@RestController)
-Request mapping (@GetMapping, etc.)
-Path variables, query params
-🔹 REST APIs
-@RequestBody, @ResponseBody
-ResponseEntity
-Exception handling (@ControllerAdvice)
-
-
-Spring AOP
-
-Aspect-Oriented Programming concepts
-Cross-cutting concerns
-Advice types:
-Before
-After
-Around
-Join Points & Pointcuts
-@Aspect annotation
-Real-time use cases (logging, security, transactions)
-
-
-Spring JPA (Spring Data JPA)
-
-🔹 Basics
-ORM concepts
-Entities (@Entity)
-Repositories (JpaRepository)
-🔹 Mapping
-One-to-One
-One-to-Many
-Many-to-One
-Many-to-Many
-🔹 Advanced
-JPQL & native queries
-Pagination & sorting
-Cascade types
-Fetch types (LAZY vs EAGER)
-Transactions (@Transactional)
-
-
-Testing (JUnit + Mockito)
-
-🔹 JUnit
-Test basics
-Assertions
-Test lifecycle
-🔹 Mockito
-@Mock, @InjectMocks
-Stubbing (when().thenReturn())
-Verification (verify())
-
-JUnit Testing with Spring
-
-@SpringBootTest
-@WebMvcTest (controller testing)
-@DataJpaTest (repository testing)
-MockMvc
-Testing REST APIs
-Integration testing vs unit testing
-
-Maven & Eclipse (Basic)
-
-🔹 Maven
-pom.xml structure
-Dependencies
-Build lifecycle
-Plugins
-🔹 Eclipse/IDE Basics
-Project setup
-Debugging
-Running applications
-
-
-Spring Security
-
-🔹 Basics
-Authentication vs Authorization
-SecurityFilterChain
-Password encoding (BCrypt)
-🔹 Advanced
-JWT authentication
-Method-level security (@PreAuthorize)
-Role-based access
-Filters
-
-
-OAuth (Security Advanced)
-
-OAuth 2.0 basics
-Authorization server
-Resource server
-Grant types:
-Authorization Code
-Client Credentials
-Access token vs Refresh token
-Integration with Spring Security
-
-
-Spring Cloud Services (Microservices)
-
-🔹 Core Concepts
-Microservices architecture
-Service discovery
-🔹 Common Tools
-Eureka (service registry)
-Spring Cloud Gateway (API Gateway)
-Config Server (central config)
-Feign Client (service-to-service calls)
-🔹 Advanced
-Circuit Breaker (Resilience4j)
-Load balancing
-Distributed tracing (Sleuth)
-
+Using SpEL in @Value:application.properties
+app.name=SpringApp
+@Value("#{ '${app.name}' + ' - Version 1' }")
+private String fullName;
