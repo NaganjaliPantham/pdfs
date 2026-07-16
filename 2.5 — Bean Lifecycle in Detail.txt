@@ -1,0 +1,63 @@
+2.5 — Bean Lifecycle in Detail
+Spring beans go through a precise sequence of steps from birth to death.
+
+
+SPRING CONTAINER STARTS
+        │
+        ▼
+1. Instantiation     → new UserService() — constructor is called
+        │
+        ▼
+2. Populate Properties → @Autowired fields/setters are filled in
+        │
+        ▼
+3. Aware Callbacks    → If bean implements BeanNameAware etc., notified
+        │
+        ▼
+4. BeanPostProcessor  → Pre-init processors run (AOP proxies created here)
+        │
+        ▼
+5. @PostConstruct     → YOUR initialization method runs
+        │
+        ▼
+6. Bean is READY      → Available for use in the application
+        │
+        ▼
+     (Application runs......)
+        │
+        ▼
+7. @PreDestroy        → YOUR cleanup method runs
+        │
+        ▼
+8. Bean Destroyed     → Object garbage collected
+
+
+
+
+
+com.myapp/
+├── MyApp.java              (@SpringBootApplication — scanning starts here)
+├── service/
+│   └── UserService.java    (@Service — found! becomes a bean)
+├── repository/
+│   └── UserRepository.java (@Repository — found! becomes a bean)
+└── controller/
+    └── UserController.java (@Controller — found! becomes a bean)
+
+
+WITHOUT SPRING                    WITH SPRING
+──────────────────────    ──────────────────────────────
+You create objects manually  →    Spring creates objects for you
+You wire dependencies        →    Spring wires them automatically
+You manage object lifecycle  →    Spring handles creation/destruction
+You write transaction code   →    Spring's @Transactional does it
+You write security code      →    Spring Security handles it
+
+
+
+Spring Framework is an open-source Java framework that helps you build enterprise applications more easily.
+
+
+
+
+

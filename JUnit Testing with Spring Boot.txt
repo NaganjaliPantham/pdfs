@@ -1,0 +1,52 @@
+ JUnit Testing with Spring Boot
+ Spring Boot provides powerful support for unit and integration testing using JUnit + Spring test annotations.
+@SpringBootTest ⭐ (Full Application Test)
+👉 Loads the entire Spring Boot application context
+✅ Integration testing
+✅ Test full flow (Controller → Service → Repository → DB)
+✅ Loads full app
+✅ Slower than unit test ❌
+✅ Used for integration testing ✅
+2. @WebMvcTest ⭐ (Controller Testing)
+ Tests only controller layer
+✅ Testing REST APIs
+✅ Testing endpoints
+✅ Fast ✅
+✅ Focuses on controller only ✅
+✅ Uses MockMvc ✅
+3. @DataJpaTest ⭐ (Repository Testing)
+👉 Tests only JPA repository layer
+✅ Entity classes
+✅ Repositories
+✅ In-memory DB (H2)
+✅ Fast ✅
+✅ Uses in-memory DB ✅
+✅ No controller/service ❌
+4. MockMvc
+👉 MockMvc is used to test REST APIs without starting the server
+✅ No need to start server ✅
+✅ Fast testing ✅
+✅ Test APIs easily ✅
+5. Testing REST APIs
+✅ Response status
+✅ JSON response
+✅ Headers
+
+Unit Testing
+👉 Tests single component in isolation
+✅ Fast ✅
+✅ Uses Mockito ✅
+✅ No DB/Server ✅
+
+Integration Testing
+👉 Tests complete flow of application
+✅ Tests full system ✅
+✅ Uses real components ✅
+✅ Slower ❌
+Unit Test → Service (Mockito)
+   ↓
+@WebMvcTest → Controller
+   ↓
+@DataJpaTest → Repository
+   ↓
+@SpringBootTest → Full Application

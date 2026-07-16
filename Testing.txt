@@ -1,0 +1,68 @@
+Testing
+
+👉 Testing is the process of verifying that your application code works correctly.
+
+ Types of Testing in Spring
+
+✅ Unit Testing → test individual classes
+✅ Integration Testing → test full flow
+
+**Test ->**A test is a method that checks whether a piece of code behaves as expected.
+✅ Each test is a method
+✅ Marked with @Test annotation
+✅ Runs independently
+✅ No main() method needed
+
+Assertions-> Assertions are used to check if the expected result matches the actual result.
+assertEquals(expected, actual);
+assertTrue(condition);
+assertFalse(condition);
+assertNull(object);
+assertNotNull(object);
+assertThrows(Exception.class, () -> method()
+✅ Automatically validate results
+✅ Fail test if condition is wrong
+✅ Essential for testing
+
+ Test Lifecycle:
+ Test lifecycle defines what happens before and after test execution.
+
+
+1. JUnit (Testing Framework)
+ JUnit is a testing framework used to write and run test cases in Java.
+ 1. Test Basics
+👉 A test case is a method that checks functionality
+ 2. Assertions
+👉 Used to verify expected vs actual result
+3. Test Lifecycle
+👉 Defines setup and cleanup of tests
+
+Annotation	Purpose
+@BeforeEach	Run before each test
+@AfterEach	Run after each test
+@BeforeAll	Run once before all tests
+@AfterAll	Run once after all tests
+
+2. Mockito (Mocking Framework)
+Mockito is used to create fake (mock) objects for testing.
+
+ 1. @Mock
+👉 Creates a fake object
+2. @InjectMocks
+👉 Injects mocks into class under test
+3. Stubbing (when().thenReturn())
+👉 Used to define behavior of mock object
+4. Verification (verify())
+👉 Used to check whether a method was called
+
+Test method runs
+     ↓
+Mockito creates mocks
+     ↓
+Stub behavior (when)
+     ↓
+Call service method
+     ↓
+Assert result
+     ↓
+Verify method call

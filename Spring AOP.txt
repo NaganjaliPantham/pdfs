@@ -1,0 +1,128 @@
+Spring AOP
+
+Spring AOP (Aspect-Oriented Programming) is used to separate cross-cutting concerns like logging, security, and transactions from business logic.
+👉 Business logic stays clean ✅
+👉 Cross-cutting concerns handled separately
+
+ 1. Cross-Cutting Concerns
+👉 Common functionality used across multiple modules
+ Examples: Logging, Security, Transactions, Exception handling
+2. Aspect->@Aspect
+👉 Class that contains cross-cutting logic
+3. Advice
+👉 Action performed at a specific point
+
+Types of Advice
+
+1. Before Advice (@Before)
+ Runs before method execution
+2. After Advice (@After)
+Runs after method execution
+ 3. After Returning (@AfterReturning)
+Runs after successful execution
+4. After Throwing (@BeforeReturning)
+Runs when exception occurs
+5. Around Advice (@Around)
+ Runs before and after method
+
+4. Join Point
+👉 Point in execution where advice can be applied
+Method execution
+Exception thrown
+5. Pointcut
+👉 Expression that selects join points
+execution(* com.app.service.*.*(..))
+
+Client → Calls method
+        ↓
+AOP intercepts (Join Point)
+        ↓
+Advice executes
+        ↓
+Original method runs
+        ↓
+Response returned
+
+
+To Enable AOP
+@EnableAspectJAutoProxy-> Usually auto-enabled in Spring Boot
+
+1. Logging using Spring AOP:
+Track application behavior:
+Method start/end
+API calls
+Errors
+✅ API request logging
+✅ Debugging issues
+✅ Monitoring execution
+2. Security using Spring AOP :
+ Check authentication & authorization before execution
+✅ Check login token (JWT)
+✅ Verify user role (admin/user)
+✅ Block unauthorized access
+3. Transactions using Spring AOP:
+ Maintain data consistency
+✅ Banking transactions
+✅ Order processing
+✅ Payment systems
+
+Client Request
+      ↓
+Logging Aspect → logs request
+      ↓
+Security Aspect → checks authentication
+      ↓
+Transaction Aspect → starts transaction
+      ↓
+Business Logic (service)
+      ↓
+Success → Commit ✅
+Failure → Rollback ❌
+      ↓
+Logging Aspect → logs response
+      ↓
+Response to client
+
+In Spring AOP, logging is used to track application flow, security ensures authentication and authorization, and transactions ensure data consistency by managing commit and rollback operations.
+
+@Transactional Annotation ⭐
+👉 Main annotation for transaction management
+👉 Transactions use Around Advice
+
+Proxy in Spring:
+ In Spring, a proxy is a special object created by the framework that wraps the actual object and intercepts method calls.
+
+👉 Spring uses proxies mainly for:
+✅ AOP (Aspect-Oriented Programming)
+✅ Transaction management (@Transactional)
+✅ Security checks
+✅ Lazy loading
+
+
+Client calls method
+Proxy intercepts the call
+Proxy executes extra logic (logging/security)
+Calls actual method
+Returns result
+
+Client → Proxy
+        ↓
+Start transaction
+        ↓
+Actual method (transfer)
+        ↓
+Success → Commit ✅
+Failure → Rollback ❌
+
+
+1. JDK Dynamic Proxy
+👉 Used when class implements an interface
+✅ Proxy is created using interface
+2. CGLIB Proxy
+👉 Used when no interface is present
+✅ Spring creates a subclass of the class
+Advantages of Proxies
+✅ Enable AOP
+✅ Keep business logic clean
+✅ Avoid duplicate code
+✅ Add behavior without modifying code

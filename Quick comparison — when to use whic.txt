@@ -1,0 +1,45 @@
+Quick comparison — when to use which:
+ScenarioUseSort a ListCollections.sort()
+Sort an arrayArrays.sort()
+Search a ListCollections.binarySearch()
+Search an arrayArrays.binarySearch()
+Prevent modificationCollections.unmodifiableList()
+Multi-thread accessCollections.synchronizedList()
+Print array contentsArrays.toString()
+
+
+
+
+
+
+
+ 
+Collections.binarySearch(list, "key")      // index of element (list must be sorted)
+Collections.sort(list)                     // natural order sort
+Collections.sort(list, comparator)         // custom sort
+Collections.reverse(list)                  // reverses in-place
+Collections.shuffle(list)                  // random order
+Collections.swap(list, i, j)              // swap two positions
+Collections.fill(list, "value")           // overwrite all elements
+Collections.copy(dest, src)               // copy src into dest
+Collections.frequency(list, "x")          // count occurrences of element
+Collections.disjoint(list1, list2)        // true if no common elements
+Collections.min(list)                     // smallest element
+Collections.max(list)                     // largest element
+Collections.nCopies(5, "hello")           // immutable list of 5 "hello"s
+Collections.unmodifiableList(list)        // read-only wrapper
+Collections.synchronizedList(list)        // thread-safe wrapper
+Collections.emptyList()                   // immutable empty list
+Collections.singletonList("x")           // immutable single-element list
+
+Arrays.sort(arr)                          // sort array in-place
+Arrays.binarySearch(arr, key)            // index in sorted array
+Arrays.copyOf(arr, 5)                    // copy first 5 elements
+Arrays.copyOfRange(arr, 2, 6)           // copy index 2 to 5
+Arrays.fill(arr, 0)                      // fill all with value
+Arrays.equals(arr1, arr2)               // deep equality check
+Arrays.deepEquals(arr1, arr2)           // for nested arrays
+Arrays.asList(arr)                       // array → fixed-size List
+Arrays.stream(arr)                       // array → Stream
+Arrays.toString(arr)                     // "[1, 2, 3]" for printing
+ 

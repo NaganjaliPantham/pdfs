@@ -1,0 +1,140 @@
+Spring Data JPA
+
+Spring Data JPA is used to interact with databases using Java objects instead of writing SQL queries.
+ Works on ORM (Object Relational Mapping)
+Java Object ↔ Database Table
+👉 ORM = Object Relational Mapping
+👉 It maps:
+
+Java class → Table
+Object → Row
+Field → Column
+
+ JPA annotations are used to map Java classes and fields to database tables and columns, and to define relationships.
+
+Entity (@Entity)
+👉 Entity is a Java class that represents a database table
+2.@Table
+👉 Specifies table name (optional)
+3.@Id
+👉 Marks primary key
+4.@GeneratedValue(strategy = GenerationType.IDENTITY)
+👉 Auto-generates ID->(auto(default), identity(auto-increment), sequence(uses database sequence), table(uses a separate table to generate))
+5.@Column
+👉 Maps field to column
+6. @ElementCollection (List of simple values)
+👉 Used when storing list of simple data types (NOT entities)
+
+Repositories (JpaRepository): JpaRepository is an interface provided by Spring Data JPA to perform database operations easily without writing SQL queries.
+Methods:
+save(entity)          // Insert / update
+findById(id)          // Get by ID
+findAll()             // Get all records
+deleteById(id)        // Delete by ID
+count()
+
+Query Methods (Derived Queries)->You can create queries just by method naming
+
+7. @Query -> Used to write custom queries manually
+👉 Custom query (JPQL / SQL)
+ a) JPQL (Preferred ✅)
+👉 Uses entity names (NOT table names)
+@Query("SELECT u FROM User u WHERE u.name = ?1")
+List<User
+
+b) Native SQL
+👉 Uses actual database query
+@Query(value = "SELECT * FROM users WHERE name = ?1", nativeQuery = true)
+List<User> findByName(String name);
+
+8.@Param
+👉 Used to bind named parameters
+@Query("SELECT u FROM User u WHERE u.name = :name")
+List<User> findByName(@Param("name") String name);
+
+9.Modifying Queries (@Modifying)
+👉 Used for update/delete queries
+@Modifying
+@Query("UPDATE User u SET u.name = ?1 WHERE u.id = ?2")
+void updateUserName(String name, Long id);
+
+10.Pagination & Sorting in Queries
+
+👉 Pagination → retrieving data in small chunks (pages) instead of loading all data
+👉 Sorting → arranging data in ascending or descending order
+
+Pagination divides large datasets into smaller pages, and sorting orders the data based on fields in Spring Data JPA
+
+1. Using PageRequest
+👉 Spring provides PageRequest to control pagination
+
+Page<User> users = userRepository.findAll(
+    PageRequest.of(0, 5)
+);
+
+ 2. Using Page Interface
+👉 Page contains pagination details
+Page<User> page = userRepository.findAll(
+    PageRequest.of(0, 5)
+);
+
+3. Using Pageable in Methods
+👉 Pass pagination dynamically
+Page<User> findByName(String name, Pageable pageable);
+
+Relationship Mapping Annotations
+
+ 1. @OneToOne
+👉 One entity is linked to exactly one other entity
+2. @OneToMany
+👉 One entity is linked to multiple entities
+3. @ManyToOne
+👉 Many entities are linked to one entity
+4. @ManyToMany
+👉 Many entities are related to many entities
+5. @JoinColumn ⭐
+👉 Specifies the foreign key column
+ 6. @JoinTable ⭐
+👉 Used in Many-to-Many mapping
+
+
+Fetch Types : Fetch type decides WHEN related data is loaded from the database
+
+1.FetchType.LAZY
+👉 Data is loaded only when accessed
+@OneToMany(fetch = FetchType.LAZY)
+private List<Order> orders;
+2. FetchType.EAGER
+👉 Data is loaded immediately
+@OneToOne(fetch = FetchType.EAGER)
+private Profile profile;
+
+Cascade Types: Cascade defines what happens to child entities when parent changes
+
+👉 If you perform operation on User, it affects Orders
+
+ 1. ALL:
+✔ Applies all operations
+✔ Save, update, delete
+@OneToMany(cascade = CascadeType.ALL)
+2. PERSIST:
+✔ Saves child automatically-> delete and update won't applied
+CascadeType.PERSIST
+ 3. MERGE
+CascadeType.MERGE
+✔ Updates child automatically
+4. REMOVE
+CascadeType.REMOVE
+✔ Deletes child when parent is deleted
+mappedBy :   mappedBy defines which side of the relationship is the owner and prevents duplicate foreign key mapping.
+@OneToMany(mappedBy = "user")
+private List<Order> orders;
+
+
+@Lob
+👉 Store large data
+
+@CreationTimestamp
+👉 Automatically sets created date
+ @UpdateTimestamp
+👉 Automatically updates date

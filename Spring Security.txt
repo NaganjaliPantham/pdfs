@@ -1,0 +1,265 @@
+Spring Security
+
+Spring Security is a framework used to secure Spring applications by handling authentication and authorization.
+
+Authentication-> identifies users
+👉 Verifying WHO the user is
+
+Example:
+Login with username/password
+JWT token validation
+
+👉 Output:
+✔ User is valid or not
+
+Authorization->grant permissions
+👉 Checking WHAT the user is allowed to do
+
+Example:
+Admin → access all APIs
+User → limited access
+
+SecurityFilterChain:  SecurityFilterChain is a configuration in Spring Security that defines how HTTP requests are secured using a chain of filters.
+👉 Every request goes through multiple checks:
+✅ Authentication (is user valid?)
+✅ Authorization (has permission?)
+✅ CSRF protection
+✅ Session handling
+👉 All these checks are handled by filters inside SecurityFilterChain ✅
+
+Client Request
+        ↓
+SecurityFilterChain (Filters)
+        ↓
+Authentication Filter
+        ↓
+Authorization Filter
+        ↓
+Controller
+        ↓
+Response
+
+csrf().disable() → disable CSRF (for APIs)
+permitAll() → public endpoints
+authenticated() → login required
+formLogin() → enable login page
+
+
+
+👉 Spring Security internally uses multiple filters:
+
+✅ Common Filters
+
+UsernamePasswordAuthenticationFilter → handles login
+BasicAuthenticationFilter → HTTP basic auth
+AuthorizationFilter → checks roles/permissions
+CSRF Filter → protects from CSRF attacks
+JWT Filter → (custom) validate token
+
+
+
+Password Encoding (BCrypt):  Password encoding is the process of converting a plain-text password into a secure hashed format before storing it in the database.
+✅ Cannot be reversed easily
+✅ Secure storage
+
+BCrypt is a password hashing algorithm used in Spring Security to securely encode passwords.
+✅ One-way hashing (cannot be decrypted)
+✅ Adds random salt automatically
+✅ Strong against brute-force attacks
+✅ Industry standard ✅
+Plain password → BCrypt hash → Stored in DB
+
+JWT
+ JWT (JSON Web Token) authentication is a stateless authentication mechanism where the client is authenticated using a token instead of sessions.
+
+👉 JWT ✅
+
+No server storage
+Stateless
+Fast & scalable
+
+👉 A JWT token has 3 parts
+Header.Payload.Signature
+
+
+1. Header
+{  "alg": "HS256",  "typ": "JWT"}
+👉 Algorithm + token type
+
+ 2. Payload
+👉 Contains user data (claims)
+{  "username": "john",  "role": "USER"}
+
+ 3. Signature
+👉 Used to verify token authenticity
+
+JWT Authentication Flow ⭐
+1. User sends login request (username/password)
+2. Server validates credentials
+3. Server generates JWT token ✅
+4. Client stores token (localStorage/session)
+5. Client sends token in every request
+6. Server validates token
+7. Access granted ✅
+
+
+JWT in Spring Security
+
+1. Generate Token-->  String token = Jwts.builder()
+    .setSubject(username)
+    .setIssuedAt(new Date())
+    .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+    .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+    .compact();
+
+2. Validate Token-->  String username = Jwts.parser()
+    .setSigningKey(SECRET_KEY)
+    .parseClaimsJws(token)
+    .getBody()
+    .getSubject();
+
+3. Create JWT Filter ⭐
+👉 Intercepts requests and validates token
+
+
+public class JwtFilter extends OncePerRequestFilter {
+
+    @Override
+    protected void doFilterInternal(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain chain)
+        throws ServletException, IOException {
+
+        String header = request.getHeader("Authorization");
+
+        if(header != null && header.startsWith("Bearer ")) {
+
+            String token = header.substring(7);
+
+            // validate token
+        }
+
+        chain.doFilter(request, response);
+    }
+
+4. Add Filter to SecurityFilterChain
+
+http
+    .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+Ensures JWT filter runs first
+
+
+Security Configuration
+
+
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+    http
+        .csrf().disable()
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/auth/**").permitAll()
+            .anyRequest().authenticated()
+        );
+
+    return http.build();
+}
+
+
+Login API
+   ↓
+AuthenticationManager validates user
+   ↓
+JWT Token generated ✅
+   ↓
+Client stores token
+   ↓
+API Request with token
+   ↓
+JWT Filter validates token
+   ↓
+Security context set
+   ↓
+Controller accessed ✅
+
+✅ Stateless (no session)
+✅ Scalable
+✅ Fast authentication
+✅ Secure (signature based)
+✅ Works well with REST APIs
+
+⚠️ Token expiry needed
+⚠️ Cannot easily revoke token
+⚠️ Slightly complex setup
+
+JWT Util (Utility class) → handles token creation & validation
+✅ Generate token
+✅ Validate token
+✅ Extract username/claims
+JWT Filter → JWT Filter is a custom filter that intercepts every HTTP request, extracts the JWT token, and validates it before allowing access.
+👉 Every request must be authenticated ✅
+👉 JWT Filter ensures:
+Token is present
+Token is valid
+
+1. Request comes with Authorization header
+2. JWT Filter intercepts request
+3. Extracts token (Bearer ...)
+4. Uses JWT Util to validate token
+5. Sets authentication in SecurityContext
+6. Request proceeds to controller ✅
+Login API (/auth/login)
+      ↓
+User credentials verified
+      ↓
+JWT Util → generateToken()
+      ↓
+Token sent to client ✅
+      ↓
+Client sends token in header
+      ↓
+JWT Filter intercepts request
+      ↓
+JWT Util validates token
+      ↓
+SecurityContext updated
+      ↓
+Access granted ✅
+Method-Level Security (@PreAuthorize)
+👉 Method-level security is used to restrict access to specific methods based on roles or permissions.
+@EnableMethodSecurity
+
+
+@PreAuthorize("hasRole('ADMIN')")
+public void deleteUser() {
+}
+👉 Only users with ADMIN role can execute this method ✅
+
+2. Role-Based Access
+ Access control based on user roles like ADMIN, USER, MANAGER
+
+User logs in
+     ↓
+Role assigned (USER/ADMIN)
+     ↓
+Request sent
+     ↓
+Spring Security checks role
+     ↓
+Access granted or denied
+Filters in Spring Security :  Filters intercept HTTP requests before reaching the controller to perform security checks.
+
+
+1. UsernamePasswordAuthenticationFilter
+👉 Handles login (username + password)
+
+✅ 2. Authorization Filter
+👉 Checks roles and permissions
+
+✅ 3. CSRF Filter
+👉 Protects against CSRF attacks
+
+✅ 4. Custom JWT Filter ⭐
+👉 Validates JWT tokens

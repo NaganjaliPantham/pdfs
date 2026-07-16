@@ -1,0 +1,9 @@
+Core Spring framework, Spring boot, Spring AOP, Spring JDBC & JPA, Junit, Mockito, Junit testing with Spring, Basic Eclipse/Maven
+
+Spring Boot, Web Applications in Spring, Spring Boot autoconfiguration, Spring Boot in Depth,
+ 
+Spring Security, OAuth
+
+Spring Cloud Services
+
+

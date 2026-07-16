@@ -1,0 +1,102 @@
+Day 1
+Core Java + OOP + Collections
+6:00–7:30 AM
+OOP Concepts: Classes, Objects, Inheritance, Polymorphism, Abstraction, Encapsulation. Memorize definitions + 1 example each.
+Collections Framework: List, Set, Map, Queue. HashMap vs LinkedHashMap vs TreeMap. ArrayList vs LinkedList. Iterator.
+Exception Handling: try-catch-finally, throws vs throw, checked vs unchecked, custom exceptions.
+Practice: Write 5 programs — Fibonacci, reverse string, palindrome, find duplicates in array, anagram check.
+
+Revision: Write top 15 OOP/Collections definitions on paper. Test yourself on common Qs.
+
+Mock Q&A: Verbally answer 10 questions aloud — "What is polymorphism?", "Difference between == and equals?"
+
+Day 2
+Java 8 Features + Java 11/17
+6:00–7:30 AM
+Lambda + Functional Interfaces: Predicate, Function, Consumer, Supplier. Method references.
+Stream API: filter(), map(), reduce(), collect(), sorted(), distinct(), forEach(). Terminal vs intermediate.
+Optional + Default/Static interface methods + Java 11/17: var, text blocks, records, sealed classes, pattern matching.
+Coding with Streams: Find second highest number, group employees by dept, filter even numbers, count words in string using streams.
+J2EE + Servlets + JSP basics: Servlet lifecycle, doGet vs doPost, JSP directives, EL, JSTL. Know the concepts, not the code.
+Mock Q&A: Lambda, Stream, Optional questions aloud.
+
+
+Day 3
+Spring Core + Spring Boot + Spring AOP
+
+Spring Core: IoC Container, BeanFactory vs ApplicationContext, Bean lifecycle, @Component/@Service/@Repository/@Controller.
+Dependency Injection: Constructor vs Setter vs Field injection, @Autowired, @Qualifier, @Primary. Bean scopes (singleton, prototype).
+Spring Boot: @SpringBootApplication, auto-configuration, starters, application.properties, embedded server, actuator.
+Spring AOP: Aspect, Advice (@Before/@After/@Around), Pointcut, JoinPoint, Weaving. Use case: logging, transactions.
+Build a mental REST API: Mentally trace a @RestController with @GetMapping, @PostMapping, ResponseEntity, @RequestBody, @PathVariable flow.
+
+Mock Q&A: 15 Spring/Spring Boot questions aloud.
+
+
+
+Day 4
+Spring Data JPA + Hibernate + REST + SOAP
+
+Hibernate + JPA: ORM concept, @Entity, @Table, @Id, session vs EntityManager, HQL, JPQL, N+1 problem, lazy vs eager loading.
+Spring Data JPA: JpaRepository, CrudRepository, custom queries @Query, @Transactional, pagination (Pageable).
+REST API concepts: HTTP methods, status codes (200/201/400/401/403/404/500), REST principles, CRUD, @RestController, ResponseEntity, HATEOAS concept.
+SOAP Web Services: WSDL, SOAP envelope, @WebService, contract-first vs code-first. REST vs SOAP differences table.
+XML + JSON: XML parsing (SAX vs DOM), XPath, JAXB. JSON structure, Jackson annotations, @JsonProperty, @JsonIgnore.
+
+Mock Q&A: Hibernate, JPA, REST API questions.
+
+
+
+Day 5
+Microservices + Spring Cloud + Security
+
+Microservices principles: SOA vs Microservices, decomposition, bounded context, inter-service communication (sync/async), circuit breaker (Resilience4j), saga pattern.
+Spring Cloud: Eureka (service registry/discovery), API Gateway (Spring Cloud Gateway), Config Server, Feign Client, Ribbon/Load balancing.
+Spring Security + OAuth2: Authentication vs Authorization, @EnableWebSecurity, SecurityFilterChain, JWT tokens, OAuth2 flow (authorization code, client credentials).
+Draw microservice architecture: Sketch on paper — Client → API Gateway → Eureka → Services → DB. Memorize this diagram.
+
+Maven + JUnit + Mockito: POM.xml structure, lifecycle phases (clean/compile/test/package), JUnit annotations (@Test/@BeforeEach), Mockito (@Mock/@InjectMocks, when/thenReturn/verify).
+
+Mock Q&A: Microservices + Spring Cloud questions aloud.
+
+
+
+Day 6
+Full Mock Interview + Project + HR Prep
+6:00–8:00 AM
+Project questions: Prepare answers for Road Accident Detection system — tech stack, ML model used, accuracy, REST API integration, challenges faced.
+8:30–10:00 AM
+Cognizant internship answers: What you worked on, what microservice patterns you saw, tech stack used, challenges, learnings.
+10:30–12:00 PM
+HR prep: Rehearse self-intro (60 sec), elevator pitch (30 sec), Tell me about yourself, Why Cognizant, Strengths/Weaknesses aloud in front of mirror.
+2:00–4:00 PM
+Full mock interview: Ask a friend or use the mock questions section below. Answer every question under 90 seconds. Record yourself.
+4:30–6:00 PM
+Weak area fix: Revisit 2–3 topics you struggled with in mock. Read answers, don't deep dive.
+7:00–8:00 PM
+Coding practice: Solve 3 easy LeetCode problems (Two Sum, Reverse Linked List, FizzBuzz variant).
+
+
+
+
+Day 7
+Final Revision + Interview Day Prep
+6:00–7:00 AM
+Cheat sheet pass 1: Read all definitions/differences from cheat sheet tab. Don't study new topics.
+7:30–9:00 AM
+Top 10 from each section: Core Java 10, Spring Boot 10, Microservices 10, REST 10. Speak answers aloud.
+9:30–10:30 AM
+Self-intro + HR: Final rehearsal of intro, pitch, HR answers. Time yourself.
+11:00–12:00 PM
+Project answers final pass: 3 sentences per answer — What, How, Result. Clean and confident.
+2:00–3:00 PM
+Cheat sheet pass 2: Focus only on items you were unsure about in pass 1.
+3:00–4:00 PM
+REST + mind calm: Light walk, no screens. Revise only mentally.
+Evening
+Sleep by 10 PM. A rested mind recalls better than an exhausted one that studied till midnight.
+
+
+
+
+

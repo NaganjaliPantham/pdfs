@@ -1,0 +1,60 @@
+Introduction
+
+
+Good Morning,
+My name is Naganjali. I have completed my B-tech in Computer Science and Engineering from Godavari Institute of Engineering and Technology. Currently, I am working as an intern at Cognizant in the Microservices domain, where I am gaining hands‑on experience in Java and spring boot. I have knowledge in technologies such as core Java, MySQl, web technologies, JavaFullstack and Machine Learning. During my academic journey, I worked on projects named Track My Leave which is done using Java Full Stack technology, Darkweb Classification which is done using Deep Learning techniques, Brain tumor detection using yolov8. These projects helped me improve my technical and problem-solving skills.I consider myself consistent because I put continuous effort into improving my skills and completing tasks on time.I am eager to build a successful career at Cognizant by contributing to real-time projects.
+
+
+I have developed strong technical skills in Java, SQL, and the MERN stack. I have worked on multiple projects in Machine Learning, Full‑Stack Development using the MERN stack, and Computer Vision, through which I gained practical understanding of application development, data processing, and problem‑solving using real use cases.
+ 
+I am eager to build my career at Cognizant by contributing to real‑time, microservices‑based projects.
+ 
+ I have actively participated in college-level hackathons and the IBM National Hackathon, where I worked in team environments to solve real-world problems under time constraints. These experiences helped me improve my problem-solving, teamwork, and adaptability skills. 
+
+I consider myself consistent because I put continuous effort into improving my skills and completing tasks on time.
+
+
+Elevator Pitch
+
+Good Morning, I’m Naganjali, a Computer Science graduate from GIET with a 9.0 CGPA. I’m currently intern at Cognizant in microservices. I have a knowledge in Java and SQL, along with practical experience in full-stack development. I’ve worked on projects like Track My Leave and Dark Web Classification, which strengthened my problem-solving and development skills. I’m passionate about applying my technical knowledge to real-world challenges and eager to grow as a software professional.
+
+STAR for Project
+
+During my academics, I worked on a project named Dark web classification. This project mainly aims to classify the text that is present in dark web .The dark web contains a large amount of unstructured and often sensitive textual data, making it challenging to identify meaningful patterns or categorize content effectively. My objective was to build a model that could accurately classify dark web text into relevant categories by leveraging advanced deep learning techniques. Additionally, I aimed to improve classification performance by combining deep learning with topic modeling approaches. I implemented a TextCNN model for classifying dark web text and used topic modeling (LDA) to extract semantic insights. I combined topic distributions with TextCNN features through a topic-weighting approach to improve contextual understanding and overall classification accuracy. The hybrid approach improved classification accuracy and contextual understanding of dark web text while strengthening my skills in deep learning.
+
+
+
+
+S – Situation
+The dark web contains a large amount of unstructured and sensitive text data, which makes it difficult to understand and classify information properly.
+
+T – Task
+My task was to build a model that can classify dark web text into meaningful categories and improve accuracy using advanced techniques.
+
+A – Action
+
+I used a TextCNN model for text classification
+Applied LDA (topic modeling) to extract important topics from the text
+Combined TextCNN features with topic information using a hybrid approach
+This helped the model understand both context and underlying topics
+
+
+R – Result
+
+The model achieved better accuracy and improved contextual understanding
+Successfully classified dark web text more effectively
+Strengthened my knowledge in deep learning and NLP techniques
+
+
+I worked on a project named Dark web classification. In today’s digital world, face recognition systems are widely used, but they raise concerns about privacy and misuse of biometric data.
+My goal was to develop a secure face recognition system that ensures user authentication while protecting sensitive facial data from misuse. Used Haar Cascade algorithm for detecting faces in real-time. Applied LBPH (Local Binary Pattern Histogram) for feature extraction
+Converted facial data into cancellable biometric templates (non-reversible). Implemented encryption techniques to protect stored data
+Designed the system for efficient and accurate recognition
+Successfully created a system that ensures secure and privacy-preserving authentication
+Reduced the risk of identity theft and biometric misuse
+Maintained good accuracy in real-time face recognition
+
+I consider myself consistent because I put continuous effort into improving my skills and completing tasks on time.
+
+I lack real-world project exposure, so I actively take part in internships and hackathons, where I gain practical experience and improve my confidence
+
